@@ -4,26 +4,22 @@
 //
 //  Created by Дмитрий Вискунов on 01.12.2022.
 //
-#include <iostream>
-#include "functions.h"
-using namespace std;
+#include "functions.h" // подключение заголовчного файла с прототипами функций
 int _StateMenu;
 void Menu(){
     cout << "Выберите действие:" << endl;
-    cout << "Выход из программы (0)" << endl;
-    cout << "Ввод данных (1)" << endl;
-    cout << "Вывод данных (2)" << endl;
-    cout << "Изменение данных (3)" << endl;
-    cout << "Удаление данных (4)" << endl;
-    cout << "Добавление данных (5)" << endl;
-    cout << "Сохранение данных (6)" << endl;
+    cout << "(0) Выход из программы" << endl;
+    cout << "(1) Ввод данных" << endl;
+    cout << "(2) Вывод данных" << endl;
+    cout << "(3) Изменение данных" << endl;
+    cout << "(4) Удаление данных" << endl;
+    cout << "(5) Добавление данных" << endl;
+    cout << "(6) Сохранение данных" << endl;
     cin >> _StateMenu;
-
-
 }
 int main() {
-    DataInitialization();
-    Menu();
+    DataInitialization(); // стандартый процесс создания буферного файла
+    Menu(); // ввыод меню
     
     int _actions;
     string FileName; 
@@ -66,10 +62,10 @@ int main() {
                 break;
             default:
                 cout << "Неправильный выбор меню" << endl;
+                Menu();
                 break;
         }
     }
-    system("cls");
     if (DataCleaning()){
         cout << "Данные очищены!" << endl;
     }else{
