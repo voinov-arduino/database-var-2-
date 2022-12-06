@@ -5,11 +5,10 @@
 //  Created by Дмитрий Вискунов on 01.12.2022.
 //
 
-#include "functions.h"
-
+#include "functions.h" // подключение заголовчного файла с прототипами функций
 using namespace::std;
 void DataInitialization(){
-    // создадим буферный файл
+    // создаем буферный файл
     ofstream _buf("Buffer.txt");
     if(!_buf){
         cout << "Ошибка создания буферного файла!" << endl;}
@@ -29,7 +28,6 @@ int AmountOfData(){
 }
 void DataEntry(){
     // временные переменные
-    
     string _surname;
     string _name;
     string _patronymic;
@@ -42,8 +40,8 @@ void DataEntry(){
     int n;
     cout << "Введите количество данных: ";
     cin >> n;
-    
     ofstream record("Buffer.txt",ios::app);
+    // запись данных по количеству
     if(record){
         record << n << endl;
         for(int i = 0; i < n;i++){
@@ -80,7 +78,7 @@ void DataEntry(){
                 cin >> stockValue[z];
                 record << stockValue[z] << endl;
 
-                cout << "Введите дату покупки акции: " << endl;
+                cout << "Введите дату покупки " << z + 1 <<" акции: " << endl;
                 cin >> DateOfBuy[z];
                 record << DateOfBuy[z] << endl;
             }
@@ -146,6 +144,7 @@ void Print(){
     
     if(reading){
         // временные переменные
+        int x;
         string _surname;
         string _name;
         string _patronymic;
@@ -158,10 +157,9 @@ void Print(){
         int n;
         cout << "Введите количество данных: ";
         cin >> n;
-        
+        reading >> x;
         for(int i = 0; i < n;i++){
             cout << "Данные о владельце №" << i + 1 << endl;
-            
             reading >> _surname;
             cout << "Фамилия:" << _surname << endl;
             
@@ -178,6 +176,7 @@ void Print(){
             cout << "Серия и номер паспорта:" << pasport << endl;
             
             for(int z = 0; z < stock; z++){
+                cout << "//////////////////////////"<< z+1 <<"//////////////////////////" << endl;
                 reading >> stockSerial[z];
                 cout << "Серия акции №" << z+1 <<":" <<stockSerial[z]<< endl;
                 
@@ -188,7 +187,7 @@ void Print(){
                 cout << "Стоимость акции №" << z+1 <<":" <<stockValue[z]<< endl;
                 
                 reading >> DateOfBuy[z];
-                cout << "Дата покупки акции №" << z+1 <<":" <<DateOfBuy<< endl;
+                cout << "Дата покупки акции №" << z+1 <<":" <<DateOfBuy[z]<< endl;
             }
             cout << "______________________________________________________" << endl;
         }
@@ -197,11 +196,6 @@ void Print(){
     }
     reading.close();
 }
-
-//bool DataCleaning(){
-    
-//}
-
 void Copy(){
     ifstream reading("Buffer_.txt");
     ofstream record("Buffer.txt",ios::out);
@@ -224,31 +218,31 @@ void Copy(){
             record << n << endl;
             for(int i = 0;i < n;i++){
                 reading >> _surname;
-                record << _surname;
+                record << _surname << endl;
                 
                 reading >> _name;
-                record << _name;
+                record << _name << endl;
                 
                 reading >> _patronymic;
-                record << _patronymic;
+                record << _patronymic << endl;
                 
                 reading >> _stock;
-                record << _stock;
+                record << _stock << endl;
                 
                 reading >> _pasport;
-                record << _pasport;
+                record << _pasport << endl;
                 for(int z = 0; z < _stock;z++){
                     reading >> _stockSerial[z];
-                    record << _stockSerial[z];
+                    record << _stockSerial[z] << endl;
                     
                     reading >> _stockNumber[z];
-                    record << _stockNumber[z];
+                    record << _stockNumber[z] << endl;
                     
                     reading >> _stockValue[z];
-                    record << _stockValue[z];
+                    record << _stockValue[z] << endl;
                     
                     reading >> _DateOfBuy[z];
-                    record << _DateOfBuy[z];
+                    record << _DateOfBuy[z] << endl;
                 }
                 
             }
@@ -274,13 +268,12 @@ void AddData(){
     // открываем буферный файл
     ofstream record("Buffer.txt",ios::app);
     ofstream record_("Buffer.txt", ios::out | ios::in);
-    
-    if(record_){
+    fstream _buf("Buffer.txt",ios::out);
+
+    if(_buf.peek() == EOF){
         record << n << endl;
     }
-    else{cout << "Ошибка открытия буферного файла" << endl;}
     if(record){
-        record << endl;
         cout << "Введите фамилию: ";
         cin >> _surname;
         record << _surname << endl;
@@ -314,7 +307,7 @@ void AddData(){
             cin >> stockValue[z];
             record << stockValue[z] << endl;
             
-            cout << "Введите дату покупки акции: ";
+            cout << "Введите дату покупки " << z+1 <<" акции: ";
             cin >> DateOfBuy[z];
             record << DateOfBuy[z] << endl;
         }
@@ -323,6 +316,7 @@ void AddData(){
     }else{cout << "Ошибка открытия файла" << endl;}
     record.close();
     record_.close();
+    _buf.close();
 }
 
 
@@ -350,7 +344,6 @@ void DataChange(){
             cin >> _n;
             
             _n--;
-            system("cls");
             
             record << n << endl;
             
@@ -373,16 +366,16 @@ void DataChange(){
                         record << pasport << endl;
                         for(int z = 0; z < stock;z++){
                             reading >> stockSerial[z];
-                            record << stockSerial[z];
+                            record << stockSerial[z] << endl;
                             
                             reading >> stockNumber[z];
-                            record << stockNumber[z];
+                            record << stockNumber[z] << endl;
                             
                             reading >> stockValue[z];
-                            record << stockValue[z];
+                            record << stockValue[z] << endl;
                             
                             reading >> DateOfBuy[z];
-                            record << DateOfBuy[z];
+                            record << DateOfBuy[z] << endl;
                         }
                     }else{
                         cout << "Введите фамилию: ";
@@ -418,7 +411,7 @@ void DataChange(){
                             cin >> stockValue[z];
                             record << stockValue[z] <<endl;
 
-                            cout << "Введите дату покупки акции: ";
+                            cout << "Введите дату покупки акции № " << z + 1 << ": ";
                             cin >> DateOfBuy[z];
                             record << DateOfBuy[z] <<endl;
                         }
@@ -476,16 +469,16 @@ void DeleteData(){
                         record << pasport << endl;
                         for(int z = 0; z < stock;z++){
                             reading >> stockSerial[z];
-                            record << stockSerial[z];
+                            record << stockSerial[z] << endl;
                             
                             reading >> stockNumber[z];
-                            record << stockNumber[z];
+                            record << stockNumber[z] << endl;
                             
                             reading >> stockValue[z];
-                            record << stockValue[z];
+                            record << stockValue[z] << endl;
                             
                             reading >> DateOfBuy[z];
-                            record << DateOfBuy[z];
+                            record << DateOfBuy[z] << endl;
                         }
                         
                     }else{
@@ -513,6 +506,8 @@ void DeleteData(){
 }
 
 void SaveData(string FileName){
+    cout << "Введите название файла в который вы хотите сохранить данные (с расширением файла): ";
+    cin >> FileName;
     ifstream reading("Buffer.txt");
     ofstream record(FileName,ios::out);
     
@@ -534,31 +529,31 @@ void SaveData(string FileName){
             
             for(int i = 0;i < n;i++){
                 reading >> _surname;
-                record << _surname;
+                record << _surname << endl;
                 
                 reading >> _name;
-                record << _name;
+                record << _name << endl;
                 
                 reading >> _patronymic;
-                record << _patronymic;
+                record << _patronymic << endl;
                 
                 reading >> stock;
-                record << stock;
+                record << stock << endl;
                 
                 reading >> pasport;
-                record << pasport;
+                record << pasport << endl;
                 for(int z = 0; z < stock;z++){
                     reading >> stockSerial[z];
-                    record << stockSerial[z];
+                    record << stockSerial[z] << endl;
                     
                     reading >> stockNumber[z];
-                    record << stockNumber[z];
+                    record << stockNumber[z] << endl;
                     
                     reading >> stockValue[z];
-                    record << stockValue[z];
+                    record << stockValue[z] << endl;
                     
                     reading >> DateOfBuy[z];
-                    record << DateOfBuy[z];
+                    record << DateOfBuy[z] << endl;
                 }
                 
             }
