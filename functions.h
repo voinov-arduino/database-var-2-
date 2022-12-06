@@ -4,15 +4,15 @@
 //
 //  Created by Дмитрий Вискунов on 01.12.2022.
 //
-#pragma once
-#include <stdio.h>
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
-#include <string>
+#pragma once // защита от двойного подключения файла
+#include <stdio.h>  // библиотека работы с потоками
+#include <iostream> // стандартная библиотека ввода-вывода
+#include <fstream> // библиотека для работы с файлами(чтение/запись)
+#include <string> // библиотека для работы со строками
 
 using namespace std;
 
+// прототипы функций
 void DataInitialization();
 void DataEntry();
 void DataReading(string FileName);
